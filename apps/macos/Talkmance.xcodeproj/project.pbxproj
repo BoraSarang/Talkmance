@@ -1,0 +1,386 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		159F7D3C428CAA5C1E27120A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87A4E93660348DE0B7580BC5 /* Assets.xcassets */; };
+		23BC7F7433EE635FEDD9787E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664BFF34C1BC8443F1D2E815 /* AppState.swift */; };
+		34F492DAFA0A15229B578C7A /* DebugPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF305E9BE2121D4C9017E0F /* DebugPanelView.swift */; };
+		6FADE352D55FD0D2DB6CAD47 /* MainWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB00C091B14E490C58779F /* MainWindowView.swift */; };
+		7740E1435EE6BB95F4BDB460 /* TalkmanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69AA46F2468DA1AD13E8F8E /* TalkmanceApp.swift */; };
+		8CC5176EF3B619DEAF9A8DF6 /* TalkmanceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6498A0C48E24B410463B6F /* TalkmanceAPI.swift */; };
+		9015A7463D398D804ED9B4E3 /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54306E2AE80D7E5A99DC2509 /* APIModels.swift */; };
+		985F45B1983E9E9D7B770B26 /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB93837E7F8AF399121715D5 /* ServerConfig.swift */; };
+		BA1CE75E0F25713BC08AB4B0 /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F3019C95077FA587C66D85 /* CharacterDetailView.swift */; };
+		BC79360BAFB92ACF75BCD1DE /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CB07A5734E52F880648A59 /* MenuBarView.swift */; };
+		C21C96B3AEF0613DD126CCB5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B98D2D1D706762514BEA8 /* SettingsView.swift */; };
+		E2807F783B19E3FB56653DD9 /* DebugLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28717D0EDB80CCC44634E935 /* DebugLogger.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D6498A0C48E24B410463B6F /* TalkmanceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkmanceAPI.swift; sourceTree = "<group>"; };
+		28717D0EDB80CCC44634E935 /* DebugLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLogger.swift; sourceTree = "<group>"; };
+		3FCB00C091B14E490C58779F /* MainWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowView.swift; sourceTree = "<group>"; };
+		54306E2AE80D7E5A99DC2509 /* APIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModels.swift; sourceTree = "<group>"; };
+		664BFF34C1BC8443F1D2E815 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		6AF305E9BE2121D4C9017E0F /* DebugPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugPanelView.swift; sourceTree = "<group>"; };
+		87A4E93660348DE0B7580BC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A9CB07A5734E52F880648A59 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		BB93837E7F8AF399121715D5 /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
+		C36EF66E0F753A73B784CDD6 /* Talkmance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Talkmance.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5F3019C95077FA587C66D85 /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
+		C76B98D2D1D706762514BEA8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F69AA46F2468DA1AD13E8F8E /* TalkmanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkmanceApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0901651AC5E04F126820CB8C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C5F3019C95077FA587C66D85 /* CharacterDetailView.swift */,
+				6AF305E9BE2121D4C9017E0F /* DebugPanelView.swift */,
+				3FCB00C091B14E490C58779F /* MainWindowView.swift */,
+				A9CB07A5734E52F880648A59 /* MenuBarView.swift */,
+				C76B98D2D1D706762514BEA8 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3D623B883AE876966F3FF58A /* Talkmance */ = {
+			isa = PBXGroup;
+			children = (
+				E61C01A90D4EA14AA84A0082 /* Core */,
+				0901651AC5E04F126820CB8C /* Views */,
+				87A4E93660348DE0B7580BC5 /* Assets.xcassets */,
+				F69AA46F2468DA1AD13E8F8E /* TalkmanceApp.swift */,
+			);
+			path = Talkmance;
+			sourceTree = "<group>";
+		};
+		5BE26F23FF1F4A35E5846E18 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C36EF66E0F753A73B784CDD6 /* Talkmance.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		61F3183AC820469F88BA3F1C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				54306E2AE80D7E5A99DC2509 /* APIModels.swift */,
+				BB93837E7F8AF399121715D5 /* ServerConfig.swift */,
+				1D6498A0C48E24B410463B6F /* TalkmanceAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		B54AA8C2455DBE3FF69BAA2C = {
+			isa = PBXGroup;
+			children = (
+				3D623B883AE876966F3FF58A /* Talkmance */,
+				5BE26F23FF1F4A35E5846E18 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E61C01A90D4EA14AA84A0082 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				61F3183AC820469F88BA3F1C /* API */,
+				664BFF34C1BC8443F1D2E815 /* AppState.swift */,
+				28717D0EDB80CCC44634E935 /* DebugLogger.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0982E0AE4A24FD7E33D41E97 /* Talkmance */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2112725B9EF6BDEE8ADC764C /* Build configuration list for PBXNativeTarget "Talkmance" */;
+			buildPhases = (
+				F84922ACF02895EE9169214A /* Sources */,
+				B56E5E9A8DD93BA31393A447 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Talkmance;
+			packageProductDependencies = (
+			);
+			productName = Talkmance;
+			productReference = C36EF66E0F753A73B784CDD6 /* Talkmance.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		381C63AAAACB247EDCDF3B3C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0982E0AE4A24FD7E33D41E97 = {
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 667DF6286F5B66CF2E3BA1BE /* Build configuration list for PBXProject "Talkmance" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = B54AA8C2455DBE3FF69BAA2C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 5BE26F23FF1F4A35E5846E18 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0982E0AE4A24FD7E33D41E97 /* Talkmance */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B56E5E9A8DD93BA31393A447 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				159F7D3C428CAA5C1E27120A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F84922ACF02895EE9169214A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9015A7463D398D804ED9B4E3 /* APIModels.swift in Sources */,
+				23BC7F7433EE635FEDD9787E /* AppState.swift in Sources */,
+				BA1CE75E0F25713BC08AB4B0 /* CharacterDetailView.swift in Sources */,
+				E2807F783B19E3FB56653DD9 /* DebugLogger.swift in Sources */,
+				34F492DAFA0A15229B578C7A /* DebugPanelView.swift in Sources */,
+				6FADE352D55FD0D2DB6CAD47 /* MainWindowView.swift in Sources */,
+				BC79360BAFB92ACF75BCD1DE /* MenuBarView.swift in Sources */,
+				985F45B1983E9E9D7B770B26 /* ServerConfig.swift in Sources */,
+				C21C96B3AEF0613DD126CCB5 /* SettingsView.swift in Sources */,
+				8CC5176EF3B619DEAF9A8DF6 /* TalkmanceAPI.swift in Sources */,
+				7740E1435EE6BB95F4BDB460 /* TalkmanceApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6F8852E6EB3A4346BF1BF7A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "톡맨스";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Talkmance";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.talkmance.app;
+				PRODUCT_NAME = Talkmance;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		A1EA712F1F269090C97CFC6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "톡맨스";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Talkmance";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.talkmance.app;
+				PRODUCT_NAME = Talkmance;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		AF0740722556F21453F3F09B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_KEY_LSUIElement = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DA57DAE3E6E1125A38DD12E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_KEY_LSUIElement = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2112725B9EF6BDEE8ADC764C /* Build configuration list for PBXNativeTarget "Talkmance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF0740722556F21453F3F09B /* Debug */,
+				DA57DAE3E6E1125A38DD12E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		667DF6286F5B66CF2E3BA1BE /* Build configuration list for PBXProject "Talkmance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F8852E6EB3A4346BF1BF7A0 /* Debug */,
+				A1EA712F1F269090C97CFC6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 381C63AAAACB247EDCDF3B3C /* Project object */;
+}

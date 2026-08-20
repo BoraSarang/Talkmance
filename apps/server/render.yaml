@@ -1,0 +1,30 @@
+# 톡맨스 서버 Render Blueprint (T-27)
+# 배포: render.yaml을 Render 대시보드에 Blueprint로 업로드
+services:
+  - type: web
+    name: talkmance-server
+    runtime: docker
+    repo: https://github.com/borasarang/Talkmance
+    plan: free
+    dockerfilePath: ./apps/server/Dockerfile
+    dockerContext: ./apps/server
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DATABASE_URL
+        sync: false # 시크릿 — 대시보드에서 설정
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: OPENCODE_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ENC_KEY
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: LOG_LEVEL
+        value: info
+      - key: CORS_ORIGINS
+        sync: false # https://talkmance.fly.dev 등 콤마 구분

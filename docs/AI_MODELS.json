@@ -1,0 +1,181 @@
+{
+  "version": "1.5.0",
+  "updated_at": "2026-08-20",
+  "language_lock": {
+    "response": "ko",
+    "reasoning": "ko",
+    "enforced": true,
+    "system_prompt_prefix": "[SYSTEM LANGUAGE LOCK] 응답은 모두 한국어로 해 주세요. 추론 내용도 모두 한국어로 출력해 주세요."
+  },
+  "doc_first": {
+    "enabled": true,
+    "required_files": [
+      "docs/PRD.md",
+      "docs/DESIGN.md",
+      "docs/plans/PLAN_v1.0_macos-server.md",
+      "docs/TODO.md"
+    ],
+    "session_auto_save_minutes": 15
+  },
+  "free_models": {
+    "note": "사용자 확정 무료 모델 카탈로그 (2026-08-13) — OpenRouter 무료 티어에서 실사용 검증됨",
+    "deepseek-v4-flash-free": {
+      "display_name": "DeepSeek V4 Flash Free",
+      "model_id": "deepseek-v4-flash-free",
+      "router_id": "openrouter/free",
+      "is_free": true,
+      "description": "DeepSeek V4 Flash 무료 티어 — 빠르고 자연스러운 일상/연애 대화 기본 모델",
+      "uses": [
+        "chat_default",
+        "summarizer",
+        "character_generate"
+      ],
+      "vision_support": false
+    },
+    "mimo-v2.5-free": {
+      "display_name": "MiMo V2.5 Free",
+      "model_id": "mimo-v2.5-free",
+      "router_id": "openrouter/free",
+      "is_free": true,
+      "description": "MiMo V2.5 무료 티어 — 감성/상황극 몰입도 우수, 관계 대화에 적합",
+      "uses": [
+        "chat_emotional"
+      ],
+      "vision_support": false
+    },
+    "google/gemma-4-31b-it": {
+      "display_name": "Gemma 4 31B IT (NVIDIA)",
+      "model_id": "google/gemma-4-31b-it",
+      "router_id": "integrate.api.nvidia.com/v1",
+      "is_free": true,
+      "description": "NVIDIA NIM 무료 — Gemma 4 31B, 한국어 우수 (프로브 확정 2026-08-20), 폴백 체인 1순위",
+      "uses": [
+        "chat_default"
+      ],
+      "vision_support": false
+    }
+  },
+  "default_chain": [
+    "google/gemma-4-31b-it",
+    "deepseek-v4-flash-free",
+    "mimo-v2.5-free"
+  ],
+  "models": {
+    "chat_free": {
+      "router_id": "openrouter/free",
+      "description": "OpenRouter 무료 라우터 — free 모델 중 자동 선택 (레이트 리밋 50~1,000 req/일)",
+      "prompt_version": "chat_v1.0",
+      "vision_support": false,
+      "is_free": true
+    },
+    "chat_default": {
+      "model": "google/gemma-4-31b-it",
+      "temperature": 0.8,
+      "max_tokens": 1024,
+      "prompt_version": "chat_v1.5",
+      "description": "NVIDIA Gemma 4 31B — 한국어 우수, 폴백 1순위 (키 설정 시), 무료 (텍스트 전용)",
+      "price": {
+        "input_per_1m_usd": 0,
+        "output_per_1m_usd": 0,
+        "is_free": true
+      },
+      "vision_support": false,
+      "traits": [
+        "자연스러운 반말",
+        "한국어 우수",
+        "무료"
+      ]
+    },
+    "chat_emotional": {
+      "model": "mimo-v2.5-free",
+      "temperature": 0.9,
+      "max_tokens": 1024,
+      "prompt_version": "chat_v1.0",
+      "description": "MiMo V2.5 Free (샤오미) — 감성/상황극 몰입도 우수, 관계 대화에 적합 (무료 티어)",
+      "price": {
+        "input_per_1m_usd": 0,
+        "output_per_1m_usd": 0,
+        "is_free": true
+      },
+      "vision_support": false,
+      "traits": [
+        "감정선",
+        "상황극 몰입",
+        "무료"
+      ]
+    },
+    "embedding": {
+      "model": "openai/text-embedding-3-small",
+      "dimensions": 1536,
+      "prompt_version": "embed_v1.0",
+      "vision_support": false,
+      "note": "RAG 장기 기억용 임베딩 (서버 내부 전용)"
+    },
+    "summarizer": {
+      "model": "deepseek-v4-flash-free",
+      "prompt_version": "summary_v1.0",
+      "vision_support": false,
+      "note": "중기 요약용 무료 모델 (서버 내부 전용)"
+    },
+    "character_generate": {
+      "model": "deepseek-v4-flash-free",
+      "prompt_version": "generate_v1.0",
+      "vision_support": false,
+      "note": "AI 캐릭터 설정 생성용 무료 모델 (서버 내부 전용)"
+    }
+  },
+  "openrouter": {
+    "models_api": "https://openrouter.ai/api/v1/models",
+    "key_api": "https://openrouter.ai/api/v1/auth/key",
+    "sync_interval_minutes": 720,
+    "quota_cache_seconds": 300,
+    "free_daily_limit_no_credit": 50,
+    "free_daily_limit_with_credit": 1000,
+    "note": "free 모델 목록은 수시로 변동 — 실시간 연동 필수"
+  },
+  "custom_models": {
+    "enabled": true,
+    "fields": [
+      "name",
+      "model_id",
+      "base_url",
+      "api_key_ref",
+      "is_free",
+      "description"
+    ],
+    "note": "사용자가 수동 추가 가능 (OpenRouter 외 Gemini/ChatGPT/Claude 직접 등)"
+  },
+  "platforms": {
+    "server": {
+      "model": "chat_default",
+      "perf_budget": {
+        "p95_ms": 300,
+        "memory_mb": 256,
+        "ttft_ms": 3000
+      }
+    },
+    "macos": {
+      "model": "chat_default",
+      "perf_budget": {
+        "cold_start_ms": 2000,
+        "memory_mb": 250
+      }
+    }
+  },
+  "cache_policy": {
+    "enabled": true,
+    "ttl_days": 7,
+    "max_entries_server": 10000,
+    "storage": "server (모델 카탈로그/할당량 캐시)"
+  },
+  "cost_guard": {
+    "max_cost_per_task_usd": 0.05,
+    "alert_at_usd": 0.01,
+    "include_saved": true,
+    "note": "연애 대화 1턴당 목표 비용 (Free 우선, 실패 시 유료 폴백)"
+  },
+  "e2e": {
+    "playwright_project": "server-api",
+    "k6_threshold_p95_ms": 300
+  }
+}

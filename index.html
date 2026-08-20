@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>톡맨스 (Talkmance) — 내 이야기를 온전히 들어줄 다정한 대화 상대</title>
+<meta name="description" content="이상형을 AI 캐릭터로 만들어 실시간으로 이어지는 로맨스 대화. 진짜 장기 기억 RAG, 모델 즉시 전환, 성인 전용 (19+). macOS · Android.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0810;
+    --bg-soft: #120d1c;
+    --surface: #171023;
+    --surface-2: #1d1530;
+    --line: rgba(255, 93, 143, .14);
+    --line-strong: rgba(255, 93, 143, .32);
+    --text: #f6f1fb;
+    --muted: #a89cc4;
+    --primary: #ff5d8f;
+    --secondary: #fb7185;
+    --accent: #ff8a4c;
+    --purple: #a06bff;
+    --grad: linear-gradient(135deg, #ff5d8f 0%, #a06bff 55%, #ff8a4c 130%);
+    --radius: 20px;
+    --space: clamp(72px, 10vw, 120px);
+    color-scheme: dark;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: rgba(255, 93, 143, .35); }
+  :focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+
+  /* ── 헤더 ───────────────────────────── */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(11, 8, 16, .78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 18px; letter-spacing: -.4px; text-decoration: none; color: var(--text); }
+  .logo-mark { width: 30px; height: 30px; border-radius: 9px; background: var(--grad); display: grid; place-items: center; }
+  .logo-mark svg { width: 18px; height: 18px; }
+  .nav-links { display: flex; align-items: center; gap: 4px; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 10px; transition: color .2s, background .2s; }
+  .nav-links a:hover { color: var(--text); background: var(--surface); }
+  .nav-cta { background: var(--grad); color: #fff !important; font-weight: 700; }
+  .nav-cta:hover { filter: brightness(1.1); }
+  @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+  /* ── 히어로 ─────────────────────────── */
+  .hero { position: relative; padding: clamp(72px, 11vw, 132px) 0 0; text-align: center; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: -30% -20% auto; height: 70%;
+    background:
+      radial-gradient(42% 55% at 18% 38%, rgba(255, 93, 143, .16) 0%, transparent 70%),
+      radial-gradient(45% 60% at 82% 30%, rgba(160, 107, 255, .16) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; font-weight: 700; letter-spacing: .6px;
+    color: var(--secondary); background: rgba(255, 93, 143, .08);
+    border: 1px solid var(--line-strong); border-radius: 999px; padding: 7px 16px;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 10px var(--primary); animation: pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .35; } }
+  h1 {
+    margin: 26px auto 0; max-width: 16ch;
+    font-size: clamp(38px, 7vw, 68px); font-weight: 900;
+    line-height: 1.14; letter-spacing: -2px;
+  }
+  h1 .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { margin: 22px auto 0; max-width: 560px; color: var(--muted); font-size: clamp(16px, 2.3vw, 19px); }
+  .sub strong { color: var(--text); font-weight: 700; }
+  .cta { display: flex; gap: 12px; justify-content: center; margin-top: 36px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 15px 30px; border-radius: 14px; text-decoration: none; cursor: pointer;
+    font-weight: 700; font-size: 15.5px; font-family: inherit;
+    transition: transform .18s, box-shadow .18s, filter .18s; border: 1px solid transparent;
+  }
+  .btn svg { width: 18px; height: 18px; }
+  .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 10px 34px rgba(255, 93, 143, .38); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 42px rgba(160, 107, 255, .5); }
+  .btn-ghost { background: var(--surface); border-color: var(--line-strong); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--primary); transform: translateY(-2px); }
+  .facts { display: flex; justify-content: center; gap: clamp(14px, 4vw, 34px); margin-top: 34px; flex-wrap: wrap; }
+  .fact { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); font-weight: 500; }
+  .fact svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; }
+
+  /* ── 스크린샷 그리드 ─────────────────── */
+  .shots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 56px; }
+  .shot { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-strong); background: var(--surface); transition: transform .25s, box-shadow .25s, border-color .25s; }
+  .shot:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: 0 18px 44px rgba(255, 93, 143, .22); }
+  .shot img { width: 100%; display: block; aspect-ratio: 3 / 2; object-fit: cover; }
+  .shot figcaption { position: absolute; inset: auto 0 0; padding: 9px 12px; font-size: 12px; font-weight: 600; color: var(--text); background: linear-gradient(transparent, rgba(11, 8, 16, .85)); text-align: left; }
+  @media (max-width: 900px) { .shots { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .shots { grid-template-columns: 1fr; } }
+
+  /* ── 섹션 공통 ──────────────────────── */
+  section { padding: var(--space) 0; }
+  .sec-head { text-align: center; max-width: 620px; margin: 0 auto 52px; }
+  .sec-head .kicker { font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--secondary); }
+  h2 { margin-top: 12px; font-size: clamp(26px, 4.4vw, 38px); font-weight: 900; letter-spacing: -1.4px; line-height: 1.2; }
+  .sec-head p { margin-top: 14px; color: var(--muted); font-size: 16px; }
+
+  /* ── 기능 블록 카드 ─────────────────── */
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 900px) { .features { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
+  .fcard {
+    position: relative; padding: 30px 26px; border-radius: var(--radius);
+    background: var(--surface); border: 1px solid var(--line);
+    transition: transform .22s, border-color .22s, background .22s;
+    overflow: hidden;
+  }
+  .fcard::after { content: ""; position: absolute; top: -40%; right: -30%; width: 60%; height: 90%; background: radial-gradient(closest-side, rgba(255, 93, 143, .14), transparent); opacity: 0; transition: opacity .25s; }
+  .fcard:hover { transform: translateY(-5px); border-color: var(--line-strong); background: var(--surface-2); }
+  .fcard:hover::after { opacity: 1; }
+  .fcard .icon { width: 44px; height: 44px; border-radius: 13px; background: rgba(255, 93, 143, .1); border: 1px solid var(--line-strong); display: grid; place-items: center; margin-bottom: 18px; }
+  .fcard .icon svg { width: 22px; height: 22px; color: var(--primary); }
+  .fcard h3 { font-size: 17.5px; font-weight: 800; letter-spacing: -.3px; }
+  .fcard p { margin-top: 8px; font-size: 14px; color: var(--muted); }
+  .fcard p em { font-style: normal; color: var(--secondary); }
+
+  /* ── 대화 미리보기 목업 ─────────────── */
+  .chat-demo { position: relative; max-width: 640px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 26px; padding: clamp(22px, 4vw, 36px); box-shadow: 0 30px 80px rgba(0, 0, 0, .5); }
+  .chat-demo::before { content: ""; position: absolute; inset: -1px; border-radius: 26px; background: var(--grad); opacity: .28; z-index: -1; filter: blur(28px); }
+  .bubble { max-width: 78%; padding: 13px 17px; border-radius: 18px; font-size: 14.5px; line-height: 1.55; margin-bottom: 12px; }
+  .bubble.user { margin-left: auto; background: var(--grad); color: #fff; border-bottom-right-radius: 6px; }
+  .bubble.bot { background: var(--surface-2); border: 1px solid var(--line); border-bottom-left-radius: 6px; }
+  .bubble .stamp { display: block; margin-top: 5px; font-size: 10.5px; opacity: .65; font-weight: 500; }
+  .typing { display: inline-flex; gap: 5px; padding: 15px 17px; }
+  .typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); animation: blink 1.3s infinite; }
+  .typing i:nth-child(2) { animation-delay: .18s; }
+  .typing i:nth-child(3) { animation-delay: .36s; }
+  @keyframes blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+
+  /* ── 플랫폼 ─────────────────────────── */
+  .platforms { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .chip { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 24px; font-weight: 700; font-size: 15px; transition: border-color .2s, transform .2s; }
+  .chip:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+  .chip svg { width: 22px; height: 22px; color: var(--purple); }
+  .chip span { display: block; font-weight: 400; font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .cta-last { text-align: center; margin-top: 52px; }
+  .cta-last .note { margin-top: 16px; font-size: 12.5px; color: var(--muted); }
+
+  /* ── 푸터 ───────────────────────────── */
+  footer { border-top: 1px solid var(--line); padding: 34px 0; text-align: center; color: var(--muted); font-size: 13px; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+  .age { color: var(--secondary); font-weight: 700; letter-spacing: .4px; }
+
+  /* ── 리빌 애니메이션 (JS 없이도 보임) ── */
+  .reveal { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .badge-dot, .typing i { animation: none; }
+    * { transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#top" aria-label="톡맨스 홈">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg>
+        </span>
+        톡<span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">맨스</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">기능</a>
+        <a href="#preview">미리보기</a>
+        <a href="#platforms">플랫폼</a>
+        <a href="https://github.com/BoraSarang/Talkmance" target="_blank" rel="noopener">GitHub</a>
+        <a class="nav-cta" href="https://github.com/BoraSarang/Talkmance/releases" target="_blank" rel="noopener">다운로드</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <span class="badge"><span class="badge-dot" aria-hidden="true"></span>AI 연애 채팅 · 만 19세 이상</span>
+      <h1>내 이야기를 온전히 들어줄<br><span class="grad-text">다정한 대화 상대</span></h1>
+      <p class="sub">이상형을 AI 캐릭터로 만들어 실시간으로 이어지는 로맨스 대화. 캐릭터는 당신의 이야기를 <strong>진짜로 기억합니다</strong>.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://github.com/BoraSarang/Talkmance/releases" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          지금 다운로드
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/BoraSarang/Talkmance" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a10 10 0 0 0-6.6 17.5c.5.4.9 0 .9-.5v-2c-3.6.8-4.4-1.7-4.4-1.7-.6-1.5-1.4-1.9-1.4-1.9-1.2-.8.1-.8.1-.8 1.3.1 1.9 1.3 1.9 1.3 1.1 2 3 1.4 3.7 1.1.1-.9.4-1.4.8-1.7-2.8-.3-5.8-1.4-5.8-6.2 0-1.4.5-2.5 1.3-3.4-.1-.3-.6-1.6.1-3.4 0 0 1.1-.3 3.5 1.3a12 12 0 0 1 6.4 0c2.4-1.6 3.5-1.3 3.5-1.3.7 1.8.2 3.1.1 3.4.8.9 1.3 2 1.3 3.4 0 4.8-3 5.9-5.9 6.2.5.4.9 1.2.9 2.4v3.6c0 .5.4.9.9.5A10 10 0 0 0 12 2z"/></svg>
+          GitHub 보기
+        </a>
+      </div>
+      <div class="facts">
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>매일 50회 무료 대화</span>
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a4 4 0 0 1 4 4c0 1.1-.4 2-1.1 2.7L16 12l-4 2-4-2 1.1-3.3A4 4 0 0 1 12 2z"/><path d="M8 16l2 1 2-1 2 1 2-1M8 20h8"/></svg>진짜 장기 기억 RAG</span>
+        <span class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>성인 전용 19+</span>
+      </div>
+      <div class="shots" role="img" aria-label="톡맨스 앱 스크린샷 4장: 홈, 캐릭터 생성, 캐릭터 정보, 대화 화면">
+        <figure class="shot"><img src="assets/screenshots/home.png" alt="톡맨스 홈 화면 — 캐릭터 목록" loading="lazy"><figcaption>홈 · 캐릭터 목록</figcaption></figure>
+        <figure class="shot"><img src="assets/screenshots/character-create.png" alt="캐릭터 생성 화면" loading="lazy"><figcaption>캐릭터 생성</figcaption></figure>
+        <figure class="shot"><img src="assets/screenshots/character-info.png" alt="캐릭터 정보 화면 — 페르소나와 기억" loading="lazy"><figcaption>캐릭터 정보</figcaption></figure>
+        <figure class="shot"><img src="assets/screenshots/chat.png" alt="대화 화면" loading="lazy"><figcaption>대화</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">Features</span>
+        <h2>왜 톡맨스인가요?</h2>
+        <p>단순한 챗봇이 아닙니다. 당신과 캐릭터 사이의 관계가 쌓이는, 살아 있는 대화.</p>
+      </div>
+      <div class="features">
+        <article class="fcard reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4.9 12.1c.6.5.9 1.4.9 2.2V17h8v-.7c0-.8.3-1.7.9-2.2A7 7 0 0 0 12 2z"/></svg></div>
+          <h3>진짜 장기 기억 (RAG)</h3>
+          <p>대화 중 알게 된 사실을 자동 저장하고, 질문에 맞는 기억을 찾아 녹입니다. <em>"지난주에 초밥 먹고 싶다고 했잖아"</em> — 그런 수준의 대화.</p>
+        </article>
+        <article class="fcard reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-9 9M3 12a9 9 0 0 1 9-9M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18"/></svg></div>
+          <h3>모델 즉시 전환</h3>
+          <p>대화 중 모델을 바꿔도 페르소나와 기억이 그대로 유지됩니다. OpenRouter Free 모델 중심의 최저 비용 구조.</p>
+        </article>
+        <article class="fcard reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></div>
+          <h3>대화 규칙 관리</h3>
+          <p>캐릭터별 말투·프롬프트를 저장하고 관리합니다. 모델이 바뀌어도 규칙은 유지됩니다.</p>
+        </article>
+        <article class="fcard reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+          <h3>수위 제한 없음</h3>
+          <p>성인 전용. 성인 캐릭터는 자유로운 대화가 가능하고, 비성인 캐릭터는 자동으로 건전한 대화를 유지합니다.</p>
+        </article>
+        <article class="fcard reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>캐릭터 상세 관리</h3>
+          <p>페르소나(성격/취미/말투/이상형), 메모리 카드 고정·편집·삭제, 대화방 목록까지 — 캐릭터를 더 깊이 알아가세요.</p>
+        </article>
+        <article class="fcard reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>무료 할당량 + BYOK</h3>
+          <p>매일 50회 무료 대화 + 사용자 API 키(BYOK) 지원. 서비스 자체는 무료입니다.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="preview" style="background:var(--bg-soft);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">Preview</span>
+        <h2>캐릭터는 기억합니다</h2>
+        <p>한 달 전 이야기한 취향도, 지난주에 한 약속도. 대화가 쌓일수록 더 가까워집니다.</p>
+      </div>
+      <div class="chat-demo reveal" aria-label="기억 RAG 대화 미리보기 예시">
+        <div class="bubble user">있지, 오늘 저녁엔 뭘 먹고 싶어?<span class="stamp">21:03</span></div>
+        <div class="bubble bot">응? 지난주에 초밥 먹고 싶다고 했잖아. 평점 좋은 곳 찾아놨어.<span class="stamp">21:03</span></div>
+        <div class="bubble user">오, 진짜 기억하고 있었어?<span class="stamp">21:04</span></div>
+        <div class="bubble bot typing" aria-label="입력 중"><i></i><i></i><i></i><span class="stamp" style="margin-left:4px">입력 중</span></div>
+        <div class="bubble bot">네가 좋아하는 계절은 가을, 이상형은 다정한 사람. 그리고 지난주 약속한 영화, 목요일이지?<span class="stamp">21:04</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="platforms">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">Platforms</span>
+        <h2>어디서든, 네이티브로</h2>
+        <p>SwiftUI와 Jetpack Compose로 만든 네이티브 앱. 스토어 미배포, GitHub Releases에서 직접 배포합니다.</p>
+      </div>
+      <div class="platforms reveal">
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2v10l6 3"/></svg>
+          macOS<span>SwiftUI · Swift 6 · DMG</span>
+        </div>
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M7 15c1.5 1.2 3 1.8 5 1.8s3.5-.6 5-1.8M9 9h.01M15 9h.01"/></svg>
+          Android<span>Kotlin · Jetpack Compose · APK</span>
+        </div>
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Server<span>Go 1.26 · PostgreSQL · SSE</span>
+        </div>
+      </div>
+      <div class="cta-last reveal">
+        <a class="btn btn-primary" href="https://github.com/BoraSarang/Talkmance/releases" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          최신 릴리즈 받기
+        </a>
+        <p class="note">GitHub Releases에서 DMG / APK 다운로드 — 버그는 이슈로 제보해 주세요</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="age">이 서비스는 만 19세 이상 성인 전용입니다.</p>
+    <p style="margin-top:8px">© 2026 Talkmance · 제작 BoRaSaRang · 문의: <a href="mailto:leeborasarang@gmail.com">leeborasarang@gmail.com</a> · <a href="https://github.com/BoraSarang/Talkmance" target="_blank" rel="noopener">GitHub</a></p>
+  </div>
+</footer>
+
+<script>
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const loadGsap = () => {
+    if (reduceMotion) return;
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js";
+    script.onload = () => {
+      const st = document.createElement("script");
+      st.src = "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js";
+      st.onload = () => {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray(".reveal").forEach(el => {
+          gsap.from(el, {
+            y: 34, opacity: 0, duration: .7, ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 86%", once: true }
+          });
+        });
+        gsap.from(".hero .badge", { y: -14, opacity: 0, duration: .5, ease: "power2.out" });
+        gsap.from(".hero h1", { y: 26, opacity: 0, duration: .7, ease: "power3.out", delay: .08 });
+        gsap.from(".hero .sub, .hero .cta, .hero .facts", { y: 22, opacity: 0, duration: .6, ease: "power3.out", stagger: .1, delay: .18 });
+        gsap.from(".hero .shot", { y: 36, opacity: 0, duration: .7, ease: "power3.out", stagger: .09, delay: .3 });
+      };
+      document.head.appendChild(st);
+    };
+    document.head.appendChild(script);
+  };
+  loadGsap();
+</script>
+
+</body>
+</html>
